@@ -1,13 +1,19 @@
 import sqlite3
 
-conexion=sqlite3.connect("bd1.db")
+# Conectarse a la base de datos "bd1.db"
+conexion = sqlite3.connect("bd1.db")
+
 try:
-    conexion.execute("""create table articulos (
-                              codigo integer primary key autoincrement,
-                              descripcion text,
-                              precio real
+    # Crear la tabla 'articulos' si no existe
+    conexion.execute("""CREATE TABLE IF NOT EXISTS articulos (
+                              codigo INTEGER PRIMARY KEY AUTOINCREMENT,
+                              descripcion TEXT,
+                              precio REAL
                         )""")
-    print("se creo la tabla articulos")
+    print("Se creó la tabla 'articulos'")
 except sqlite3.OperationalError:
-    print("La tabla articulos ya existe")
+    # La tabla 'articulos' ya existe en la base de datos
+    print("La tabla 'articulos' ya existe")
+
+# Cerrar la conexión a la base de datos
 conexion.close()
